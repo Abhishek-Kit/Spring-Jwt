@@ -8,20 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuizService 
-{
+public class QuizService {
 	@Autowired
 	QuizDao quizDao;
 	@Autowired
 	QuestionDao questionDao;
 
 	public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
-		List<Question> question = questionDao.findRandomQuestionByCategory(category,numQ);
-				
-		Quiz quiz= new Quiz();
+		List<Question> question = questionDao.findRandomQuestionByCategory(category, numQ);
+
+		Quiz quiz = new Quiz();
 		quiz.setTitle(title);
 		quiz.setQuestions(question);
 		quizDao.save(quiz);
-		return new ResponseEntity<>("Success",HttpStatus.CREATED);
+		return new ResponseEntity<>("Success", HttpStatus.CREATED);
 	}
 }
